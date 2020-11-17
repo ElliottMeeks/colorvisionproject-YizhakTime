@@ -1,1 +1,5 @@
-The RGB values are 4, 5, 5
+#00abcf
+
+#aa0000 676767
+
+#bb0000 #aa0000

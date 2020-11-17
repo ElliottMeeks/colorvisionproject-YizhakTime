@@ -1,10 +1,12 @@
 Red/Green Colorblindness Simulation
 ## Description
-Get the red, green and blue color values from the user and store those values in a text file. 
+The objective of this project is read in a file and collect hexadecimal colors. 
 
-The user will be directed to GIMP, where they will retrieve the RGB color values from an image file on the program
+Once, these colors are retrieved, they will be processed into a function wheere their values will change based on the colorblindness, in this case, red-green colorblindness. 
 
-Since the values are from 0 - 255, there will be if statements and a do while loop to correct users if they input invalid responses
+What this entails is that the colors values will be decreased by a certain amount (i.e. Decrease red by 10%)
+
+Then these colors will be placed back into a new file where they will result into a new file where the user can compare the previous file and the new file and compare them
 
 ## Developer
 Yizhak Cohen
@@ -12,58 +14,56 @@ Yizhak Cohen
 ## Example
 
 To run the program, give the following commands:
- do {
-  cout << "Open a file and upload it to GIMP.\n";
-  cout << "Inspect one pixel and its RGB value.\n";
-  cout << "Then, display it. Repeat. \n";
-  cout << "What is the file? \n";
-  getline(cin, file);
 
-  reader.open(file, ios::out);
+  else {
+      vector <string> list;
 
-  if (!reader.fail()) {
-    do {
-    cout << "Input RGB values (0-255): \n";
-    cin >> red;
-    cin >> green;
-    cin >> blue;
-      if ((red < 0 || green < 0 || blue < 0) || (red > 255 || green > 255 || blue > 255 )) {
-        cout << "Invalid values. Please input correct values. \n";
+      while (!file.eof()) {
+        getline(file, word);
+        int number = 0;
+
+
+          do {
+            number = word.find("#", number);
+            if (number >= 0 && number < word.size()) {
+              string color = word.substr(number, 7);
+              number++;
+              list.push_back(color);               
+            }
+          } while (number != -1 && number < word.size());   
       }
-  } while ((red < 0 || green < 0 || blue < 0) || (red > 255 || green > 255 || blue > 255));
-   reader <<"The RGB values are " << red << ", " << green << ", " << green << endl;
-
   }
 
+## Sample output
 
 Here is an example of the program running:
-Open a file and upload it to GIMP. 
-Inspect one pixel and its RGB value. 
-Then, display it. Repeat. 
-What is the file?
+
+Open file
 file.text
-Input RGB values (0-255):
-4
-5
-6
+#00abcf
+#000000
 Examine another file (y/n)?
 n
 
 ## C++ Guide
 
 ### Variables and Data Types
-I created variables with the data type of "int" for the RGB values because they are only whoe numbers. 
-
-I used "char" with the variable name decision to allow the user the chance to create another text file to write the RGB values and they are represented with the 'Y' and 'y'.
+I took careful consideration in choosing my variables. For example, I had to decide which variable to use to get the '#' character from reading the file. I could have used a char data type to read from the file but I had to take into account on which method to grab values from the file. I decided to use string find which requires a string variable, the reason I used string in my first function. 
 
 ### Input and Output
-I used input and output by printing the message "Error. Please input the correct RGB values." at the do-while loop.
+I used input and output by printing the message "Error," when the file could not be opened, so the user can see that the file does not exist. 
 
 ### Decisions
-I have made decision suing if and else where I chose to have the file opened with a "!.fail()" to inspect if the file could be open. If it cannot open, then there is an else of that option, which outputs the message "Error."
+I have made decisions regarding opening a file because I have to consider the possiblity that the file cannot be opened. In that case, I made an if and else condition where if it fails, then it couts the message "Error". If the file does exist then, the program continues, hence the else condition. 
 
 ### Iteration
-I made iterations in the form of do-while loops which I checked whether the RGB values are from (0-255). If they are not within the (0-255) range, then an error message appears and requires the user to input the correct RGB values
+My iterations came in the form of do-while where I used them to repeat asking the user for the file if they want to enter a new file or they accidentally wrote a wrong name. This allows the program to continously ask for a new file to open.   
 
 ### File Input and Output
-I had the ofstream aspect of the fstream class where the user gets to write the RGB values to a file. Since the user are writing to a file, I used the .open() and the .close () to open and close the file.
+Since I want to read in a file, then I want to use the class called fstream which allows to write and read to the file. However, since I needed to read words from the file, I used the file functions like file.open() and file.close() to access and close the file. 
+
+### Vectors/Arrays
+I have used vectors to store string values such as the hexadecimal values because if I had just stored them into one string variable, then they will be only useful for displaying all the color values but not for storing the string values because the variable will only take in the latest color value. So, I used a vector of strings to store these hexadecimal values using push_back() method. As a result, I could display the vector contents or pass them into another function if needed. 
+
+### Functions
+I used functions because they save space and provide smoother functionality. For example, I used a function called findChar without any parameters and a return type because it is locating the hexadecimal values and storing them in a list. 
