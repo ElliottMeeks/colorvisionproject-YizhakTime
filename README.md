@@ -8,12 +8,19 @@ What this entails is that the colors values will be decreased by a certain amoun
 
 Then these colors will be placed back into a new file where they will result into a new file where the user can compare the previous file and the new file and compare them
 
+NOTE: The hex function is reference to a source from online through this link. Convert decimal to string hex, as adapted from: https://www.tutorialspoint.com/stringstream-in-cplusplus-for-decimal-to-hexadecimal-and-back
+
+Other string functions and what not are referenced from the online c++ website https://www.cplusplus.com/ for fucntions such as string.find, substr, and strtol
+
 ## Developer
 Yizhak Cohen
 
 ## Example
 
 To run the program, give the following commands:
+
+g++ -std=c++11 *.cpp -o cvp; ./cvp
+
 
   else {
       vector <string> list;
@@ -67,3 +74,6 @@ I have used vectors to store string values such as the hexadecimal values becaus
 
 ### Functions
 I used functions because they save space and provide smoother functionality. For example, I used a function called findChar without any parameters and a return type because it is locating the hexadecimal values and storing them in a list. 
+
+### Classes
+Classes are used to create data types which organizes function according to a certain characteristic such as car having classes such as a class engine. I created a class called filecolor which have functions that change the color from a file. For example, in my main.cpp, I have a function called findChar() which finds the hexadecimals from a file and stores them from a vector. This vector is referred to the class called filecolor which changes the elements inside the vector into a different color. 
